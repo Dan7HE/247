@@ -1,0 +1,13 @@
+# @package _global_
+module:
+  _target_: emg2qwerty.lightning.RNNConvCTCModule  # 指向你刚刚写的这个新类！
+  in_features: 528
+  mlp_features:
+  - 384
+  rnn_hidden_size: 256
+  rnn_num_layers: 2
+  rnn_bidirectional: true
+datamodule:
+  _target_: emg2qwerty.lightning.WindowedEMGDataModule
+  window_length: 8000  # 4 sec windows for 2kHz EMG
+  padding: [1800, 200]  # 900ms past context, 100ms future context
